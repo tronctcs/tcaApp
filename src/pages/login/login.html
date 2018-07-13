@@ -1,0 +1,43 @@
+<ion-content>
+  <ion-row class="logo-row">
+    <ion-col></ion-col>
+    <ion-col>
+      <img src="/assets/imgs/icon_tca.png" />
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+  <ion-row class="welcomeText">
+    <ion-col col-12 text-center>
+      <h6 no-padding no-margin>Welcome To</h6>
+    </ion-col>
+    <ion-col col-12 text-center>
+      <h6 text-uppercase>Ticket claim application</h6>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-12>
+      <form #f="ngForm">
+        <ion-list class="login__input__list">
+          <ion-item>
+            <ion-label>
+              <ion-icon ios="ios-contact" md="md-contact" item-left></ion-icon>
+            </ion-label>
+            <ion-input type="userName" name="email" ngModel required placeholder="Username" autocomplete="off"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <ion-icon ios="ios-lock" md="md-lock" item-left></ion-icon>
+            </ion-label>
+            <ion-input type="password" name="password" ngModel required placeholder="Password" autocomplete="off"></ion-input>
+          </ion-item>
+          <button ion-button block round outline color="default" type="submit" [disabled]="!f.valid">Signin</button>
+        </ion-list>
+      </form>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-12 text-center>
+      <span class="register__link">Create an Account</span>
+    </ion-col>
+  </ion-row>
+</ion-content>

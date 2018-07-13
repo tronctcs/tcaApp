@@ -5,12 +5,19 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { DashboardPage } from '../pages/dashboard/dashboard';
+import { TicketDetailsPage } from '../pages/ticket-details/ticket-details';
+import { LoginPage } from '../pages/login/login';
+import { Network } from '@ionic-native/network';
+import { NetworkServices } from '../services/networkServices';
+import { ToastServices } from '../services/toastServices';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    LoginPage,
+    DashboardPage,
+    TicketDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -19,12 +26,17 @@ import { HomePage } from '../pages/home/home';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    LoginPage,
+    DashboardPage,
+    TicketDetailsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    NetworkServices,
+    ToastServices,
+    Network
   ]
 })
-export class AppModule {}
+export class AppModule { }
