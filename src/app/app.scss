@@ -4,6 +4,7 @@
     left:0;
     right:0;
     border-radius: 0;
+    margin-bottom: -10px;
 }
 .successToast .toast-wrapper{
     @include toastMain('secondary');
@@ -11,4 +12,12 @@
 
 .errorToast .toast-wrapper{
     @include toastMain('danger');
+}
+
+.toolbar-background{
+    background: color($colors,'primary');
+}
+.toolbar-title{
+
+    color: color($colors,'default');
 }

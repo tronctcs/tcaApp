@@ -16,13 +16,13 @@
   </ion-row>
   <ion-row>
     <ion-col col-12>
-      <form #f="ngForm">
+      <form #f="ngForm" (ngSubmit)="onSignin(f)"> 
         <ion-list class="login__input__list">
           <ion-item>
             <ion-label>
               <ion-icon ios="ios-contact" md="md-contact" item-left></ion-icon>
             </ion-label>
-            <ion-input type="userName" name="email" ngModel required placeholder="Username" autocomplete="off"></ion-input>
+            <ion-input type="userName" name="userid" ngModel required placeholder="Username" autocomplete="off"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label>

@@ -11,16 +11,24 @@ import { LoginPage } from '../pages/login/login';
 import { Network } from '@ionic-native/network';
 import { NetworkServices } from '../services/networkServices';
 import { ToastServices } from '../services/toastServices';
+import { Device } from '@ionic-native/device';
+import { AuthServices } from '../services/authServices';
+import { HttpModule } from '@angular/http';
+import { OpenTicketsPage } from '../pages/open-tickets/open-tickets';
+import { sideMenu } from '../components/menu.component';
 
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
     DashboardPage,
-    TicketDetailsPage
+    TicketDetailsPage,
+    OpenTicketsPage,
+    sideMenu
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -28,7 +36,8 @@ import { ToastServices } from '../services/toastServices';
     MyApp,
     LoginPage,
     DashboardPage,
-    TicketDetailsPage
+    TicketDetailsPage,
+    OpenTicketsPage
   ],
   providers: [
     StatusBar,
@@ -36,7 +45,9 @@ import { ToastServices } from '../services/toastServices';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     NetworkServices,
     ToastServices,
-    Network
+    Network,
+    Device,
+    AuthServices
   ]
 })
 export class AppModule { }
