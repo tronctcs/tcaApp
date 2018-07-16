@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, MenuController, Events } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { AuthServices } from '../../services/authServices';
+import { SignUpPage } from '../sign-up/sign-up';
+import { ToastServices } from '../../services/toastServices';
+import { Storage } from '@ionic/storage';
+import { MyApp } from '../../app/app.component';
 
 
 @IonicPage()
@@ -10,10 +14,12 @@ import { AuthServices } from '../../services/authServices';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+  signUpPage:any=SignUpPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public loadingCntrl: LoadingController, public alertCntrl: AlertController,
-    private authServices: AuthServices, public menuCntrl:MenuController) {
+    private authServices: AuthServices, public menuCntrl:MenuController,
+    public storage:Storage,public events: Events) {
   }
 
   ionViewDidEnter() {
@@ -31,7 +37,17 @@ export class LoginPage {
     this.authServices.signIn(f.value.userid, f.value.password)
       .then(data => {
         loading.dismiss();
-        console.log(data)
+        if(data){
+          this.storage.set('tkn', data);
+          this.events.publish('user:login');
+        }else{
+          const alert = this.alertCntrl.create({
+            message: 'Invalid Username or password',
+            title: 'Signin Falied',
+            buttons: ['Ok']
+          });
+          alert.present();
+        }
       })
       .catch(err => {
         loading.dismiss();
@@ -42,6 +58,10 @@ export class LoginPage {
         });
         alert.present();
       });
+  }
+
+  signUp(){
+    this.navCtrl.push(this.signUpPage);
   }
 
 }

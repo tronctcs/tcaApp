@@ -9,15 +9,15 @@
 .successToast .toast-wrapper{
     @include toastMain('secondary');
 }
-
 .errorToast .toast-wrapper{
     @include toastMain('danger');
 }
-
 .toolbar-background{
     background: color($colors,'primary');
 }
 .toolbar-title{
-
     color: color($colors,'default');
+}
+.toolbar-content-md{
+    display: flex;
 }

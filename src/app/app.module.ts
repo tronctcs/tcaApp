@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { DashboardPage } from '../pages/dashboard/dashboard';
@@ -16,11 +17,13 @@ import { AuthServices } from '../services/authServices';
 import { HttpModule } from '@angular/http';
 import { OpenTicketsPage } from '../pages/open-tickets/open-tickets';
 import { sideMenu } from '../components/menu.component';
+import { SignUpPage } from '../pages/sign-up/sign-up';
 
 @NgModule({
   declarations: [
     MyApp,
     LoginPage,
+    SignUpPage,
     DashboardPage,
     TicketDetailsPage,
     OpenTicketsPage,
@@ -29,12 +32,14 @@ import { sideMenu } from '../components/menu.component';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     LoginPage,
+    SignUpPage,
     DashboardPage,
     TicketDetailsPage,
     OpenTicketsPage

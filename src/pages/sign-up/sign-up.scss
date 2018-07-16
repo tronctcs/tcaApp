@@ -1,3 +1,9 @@
 page-sign-up {
+    .list-ios > .item-block:first-child{
+        border-top: 0;
+    }
 
+    .signUpBtn{
+        margin-top: 10px;
+    }
 }
