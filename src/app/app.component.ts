@@ -8,6 +8,7 @@ import { NetworkServices } from '../services/networkServices';
 import { OpenTicketsPage } from '../pages/open-tickets/open-tickets';
 import { AuthServices } from '../services/authServices';
 import { Storage } from '@ionic/storage';
+import { Keyboard } from '@ionic-native/keyboard';
 
 
 @Component({
@@ -17,33 +18,43 @@ export class MyApp {
   dashboardPage: any = DashboardPage;
   openTicketsPage: any = OpenTicketsPage;
   loginPage: any = LoginPage;
-  rootPage: any = this.loginPage;
+  rootPage: any = '';
   isAuthenticated: boolean = false;
   @ViewChild('nav') nav: NavController;
+  userName: string = "User"
 
-  constructor(platform: Platform, statusBar: StatusBar,
+  constructor(public platform: Platform, statusBar: StatusBar,
     splashScreen: SplashScreen, private networkServices: NetworkServices,
     private menuCntrl: MenuController, private authService: AuthServices,
-    public alertCtrl: AlertController, public events: Events, public storage: Storage) {
+    public alertCtrl: AlertController, public events: Events, public storage: Storage,
+    public keyboard: Keyboard) {
 
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
       this.networkServices.initilizeNetworkEvents();
+      this.keyboard.hideKeyboardAccessoryBar(true);
+      this.keyboard.disableScroll(true);
+      this.platform.registerBackButtonAction(this.exit);
+
+      this.storage.get('tkn').then((val) => {
+        if (val !== undefined && val !== "" && val !== null) {
+          this.isAuthenticated = true;
+        }
+      }).then(() => {
+        this.changePage();
+      });
+
 
     });
-    
-    this.storage.get('tkn').then((val) => {
-      if (val !== undefined && val!=="" && val!==null) {
-        this.isAuthenticated = true;
-        this.changePage();
-      }
-    })
-    
+
+
+
     events.subscribe('user:login', () => {
       this.isAuthenticated = true;
       this.changePage();
     });
+
 
 
   }
@@ -87,6 +98,24 @@ export class MyApp {
       ]
     });
     alert.present();
+  }
+
+  exit() {
+    let alert = this.alertCtrl.create({
+      title: 'Confirm',
+      message: 'Do you want to exit?',
+      buttons: [{
+        text: "Ok",
+        handler: () => { this.exitApp() }
+      }, {
+        text: "Cancel",
+        role: 'cancel'
+      }]
+    })
+    alert.present();
+  }
+  exitApp() {
+    this.platform.exitApp();
   }
 
 

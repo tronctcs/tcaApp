@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
+import { Keyboard } from '@ionic-native/keyboard';
 
 import { MyApp } from './app.component';
 import { DashboardPage } from '../pages/dashboard/dashboard';
@@ -52,7 +53,8 @@ import { SignUpPage } from '../pages/sign-up/sign-up';
     ToastServices,
     Network,
     Device,
-    AuthServices
+    AuthServices,
+    Keyboard
   ]
 })
 export class AppModule { }
