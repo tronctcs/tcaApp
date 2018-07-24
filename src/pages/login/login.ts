@@ -14,12 +14,12 @@ import { MyApp } from '../../app/app.component';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  signUpPage:any=SignUpPage;
+  signUpPage: any = SignUpPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public loadingCntrl: LoadingController, public alertCntrl: AlertController,
-    private authServices: AuthServices, public menuCntrl:MenuController,
-    public storage:Storage,public events: Events) {
+    private authServices: AuthServices, public menuCntrl: MenuController,
+    public storage: Storage, public events: Events) {
   }
 
   ionViewDidEnter() {
@@ -28,7 +28,7 @@ export class LoginPage {
 
   ionViewWillLeave() {
     this.menuCntrl.enable(true);
-}
+  }
   onSignin(f: NgForm) {
     const loading = this.loadingCntrl.create({
       content: 'Signing you in...'
@@ -37,10 +37,10 @@ export class LoginPage {
     this.authServices.signIn(f.value.userid, f.value.password)
       .then(data => {
         loading.dismiss();
-        if(data){
+        if (data) {
           this.storage.set('tkn', data);
           this.events.publish('user:login');
-        }else{
+        } else {
           const alert = this.alertCntrl.create({
             message: 'Invalid Username or password',
             title: 'Signin Falied',
@@ -60,7 +60,7 @@ export class LoginPage {
       });
   }
 
-  signUp(){
+  signUp() {
     this.navCtrl.push(this.signUpPage);
   }
 

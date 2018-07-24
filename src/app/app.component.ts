@@ -48,21 +48,18 @@ export class MyApp {
 
     });
 
-
-
     events.subscribe('user:login', () => {
       this.isAuthenticated = true;
       this.changePage();
     });
 
-
-
   }
+
   changePage() {
     if (this.isAuthenticated) {
-      this.rootPage = this.openTicketsPage;
+      this.nav.setRoot(this.openTicketsPage);
     } else {
-      this.rootPage = this.loginPage;
+      this.nav.setRoot(this.loginPage);
     }
 
   }

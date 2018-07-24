@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 import { Http, RequestOptions, Headers, Response } from "@angular/http";
 import 'rxjs/Rx';
 import { Storage } from "@ionic/storage";
-import { Token } from "@angular/compiler";
 
 @Injectable()
 export class AuthServices {
@@ -24,7 +23,7 @@ export class AuthServices {
         let body = "userid=" + userid.toLowerCase() + "&password=" + btoa(password) + "&deviceid=" + this.deviceId;
 
         return new Promise((resolve) => {
-            this.http.post("https://tca.tronc.com/api/tca/IsLogin", body, { headers: headers })
+            this.http.post("https://stagetca.tronc.com/api/tca/IsLogin", body, { headers: headers })
                 .subscribe((data) => {
                     resolve(data.json());
                 });
@@ -35,7 +34,7 @@ export class AuthServices {
     logOut() {
         this.storage.get('tkn').then((val) => {
             new Promise((resolve) => {
-                this.http.get('https://tca.tronc.com/api/tca/logout?authkey=' + val)
+                this.http.get('https://stagetca.tronc.com/api/tca/logout?authkey=' + val)
                     .subscribe();
             });
         }).then(() => {

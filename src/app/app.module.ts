@@ -19,6 +19,7 @@ import { HttpModule } from '@angular/http';
 import { OpenTicketsPage } from '../pages/open-tickets/open-tickets';
 import { sideMenu } from '../components/menu.component';
 import { SignUpPage } from '../pages/sign-up/sign-up';
+import { TicketServices } from '../services/ticketServices';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import { SignUpPage } from '../pages/sign-up/sign-up';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+      backButtonText: ''
+    }),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -54,7 +57,8 @@ import { SignUpPage } from '../pages/sign-up/sign-up';
     Network,
     Device,
     AuthServices,
-    Keyboard
+    Keyboard,
+    TicketServices
   ]
 })
 export class AppModule { }

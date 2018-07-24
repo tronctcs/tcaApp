@@ -1,3 +1,50 @@
 page-open-tickets {
+    ion-content{
+        background: #e6f7ff !important;
+    }
+    ion-card{
+        border: 1px solid #c1afaf;
+    }
+    .scroll-content{
+        padding: 0 !important;
+    }
+    .btn__row__border{
+        border-top: 1px solid #ccc;
+    }
+    .tkt__prority__row{
+        text-align: center;
+        border-right: 1px solid #ccc;
+
+        .prority__text{
+            width: -webkit-max-content;
+            width: -moz-max-content;
+            width: max-content;
+            margin: 18% 22%;
+            color: white;
+            font-size: 2em;
+            
+        }
+       
+    }
+
+    .title__text{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .P1 {
+        background: color($colors,'danger');
+      }
+      
+      .P2 {
+        background: color($colors,'warning');
+      }
+      
+      .P3 {
+        background: color($colors,'primary');
+      }
+      .P4{
+        background:  color($colors,'secondary_2');
+      }
 
 }

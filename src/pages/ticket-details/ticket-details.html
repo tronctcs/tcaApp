@@ -1,12 +1,57 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Details</ion-title>
+    <ion-title>{{tktDetails.IncId}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="claimTicket()">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-grid>
+    <ion-row class="tktDetails__row">
+      <ion-col col-12 class="tktDetails__col" [ngClass]='tktDetails.PriorityDisplay'>
+        <label class="label__text">Title:</label>
+        <span class="desc__text">{{tktDetails.Title}}</span>
+      </ion-col>
+      <ion-col col-12 class="tktDetails__col" [ngClass]='tktDetails.PriorityDisplay'>
+        <label class="label__text">Description:</label>
+        <span class="desc__text">{{tktDetails.Decs}}</span>
+      </ion-col>
+      <ion-col col-12 class="tktDetails__col" [ngClass]='tktDetails.PriorityDisplay'>
+        <label class="label__text">Priority:</label>
+        <span class="desc__text">{{tktDetails.Priority}}</span>
+      </ion-col>
+      <ion-col col-12 class="tktDetails__col" [ngClass]='tktDetails.PriorityDisplay'>
+        <label class="label__text">Assigned Group:</label>
+        <span class="desc__text">{{tktDetails.AssignedGroup}}</span>
+      </ion-col>
+      <ion-col col-12 class="tktDetails__col" [ngClass]='tktDetails.PriorityDisplay'>
+        <label class="label__text">Urgency:</label>
+        <span class="desc__text">{{tktDetails.Urgency}}</span>
+      </ion-col>
+      <ion-col col-12 class="tktDetails__col" [ngClass]='tktDetails.PriorityDisplay'>
+        <label class="label__text">Created On:</label>
+        <span class="desc__text">{{tktDetails.CreatedOn | date:'medium'}}</span>
+      </ion-col>
+      <ion-col col-12 class="tktDetails__col" [ngClass]='tktDetails.PriorityDisplay'>
+        <label class="label__text">Created By:</label>
+        <span class="desc__text">{{tktDetails.CreatedUpdatedBy}}</span>
+      </ion-col>
+      <ion-col col-12 class="tktDetails__col" [ngClass]='tktDetails.PriorityDisplay'>
+        <label class="label__text">Source:</label>
+        <span class="desc__text">{{tktDetails.Source}}</span>
+      </ion-col>
+      <ion-col col-12 class="tktDetails__col" [ngClass]='tktDetails.PriorityDisplay'>
+        <label class="label__text">Status:</label>
+        <span class="desc__text">{{tktDetails.Status}}</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

@@ -1,3 +1,40 @@
 page-ticket-details {
-
+    ion-content{
+        background: #e6f7ff !important;
+    }
+    .scroll-content{
+        padding: 5px 10px !important;
+    }
+    .tktDetails__row{
+        .tktDetails__col{
+            padding: 15px 5px;
+            background: white;
+            margin: 3px 0;
+            border-radius: 5px;
+            box-shadow: 1px 1px 1px 1px #ccc;
+    
+            
+        }
+        .label__text{
+            font-size: 16px;
+            font-weight: bold;
+            color: #2a2c48;
+        }
+        
+        .P1 {
+            border-left: 5px solid color($colors,'danger');
+          }
+          
+          .P2 {
+            border-left: 5px solid color($colors,'warning');
+          }
+          
+          .P3 {
+            border-left: 5px solid color($colors,'primary');
+          }
+          .P4{
+            border-left: 5px solid color($colors,'secondary_2');
+          }
+        
+    }
 }
