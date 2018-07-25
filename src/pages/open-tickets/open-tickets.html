@@ -13,34 +13,44 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-card *ngFor="let item of items">
-    <ion-row  (click)='viewDetails(item)'>
-      <ion-col col-3 text-uppercase class="tkt__prority__row" [ngClass]='item.PriorityDisplay'>
-        <p class="prority__text">{{item.PriorityDisplay}}</p>
-      </ion-col>
-      <ion-col col-9>
-        <ion-row>
-          <ion-col col-12>{{item.IncId}}</ion-col>
-          <ion-col col-12 class="title__text">{{item.Title}}</ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
-    <ion-row no-padding class="btn__row__border">
-      <ion-col text-left>
-        <button ion-button small color="secondary" icon-start (click)='viewDetails(item)'>
-          <ion-icon name='eye'></ion-icon>
-          View
-        </button>
-      </ion-col>
+  <ng-container  *ngIf="conatinerShow;else no_items">
+    <ion-card *ngFor="let item of items">
+      <ion-row (click)='viewDetails(item)'>
+        <ion-col col-3 text-uppercase class="tkt__prority__row" [ngClass]='item.PriorityDisplay'>
+          <p class="prority__text">{{item.PriorityDisplay}}</p>
+        </ion-col>
+        <ion-col col-9>
+          <ion-row>
+            <ion-col col-12>{{item.IncId}}</ion-col>
+            <ion-col col-12 class="title__text">{{item.Title}}</ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row no-padding class="btn__row__border">
+        <ion-col text-left>
+          <button ion-button small color="secondary" icon-start (click)='viewDetails(item)'>
+            <ion-icon name='eye'></ion-icon>
+            View
+          </button>
+        </ion-col>
 
-      <ion-col text-right>
-        <button ion-button small color="primary" icon-start (click)='claimTicket(item.IncId)'>
-          <ion-icon name='checkmark-circle-outline'></ion-icon>
-          Claim
-        </button>
-      </ion-col>
+        <ion-col text-right>
+          <button ion-button small color="primary" icon-start (click)='claimTicket(item.IncId)'>
+            <ion-icon name='checkmark-circle-outline'></ion-icon>
+            Claim
+          </button>
+        </ion-col>
 
-    </ion-row>
-  </ion-card>
-
+      </ion-row>
+    </ion-card>
+  </ng-container>
+  <ng-template #no_items>
+    <ion-card>
+      <ion-row>
+        <ion-col text-center>
+          <h5 class="no_tickets__text">No any open tickets found. Enjoy your day!!!</h5>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ng-template>
 </ion-content>

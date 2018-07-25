@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertCmp, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { TicketServices } from '../../services/ticketServices';
 import { Storage } from "@ionic/storage";
 import { Tickets } from '../../models/tickets';
@@ -13,6 +13,7 @@ import { TicketDetailsPage } from '../ticket-details/ticket-details';
 export class OpenTicketsPage {
   public items: Tickets[] = [];
   public ticketDetailsPage: any = TicketDetailsPage;
+  public conatinerShow:boolean=true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ticketServices: TicketServices, public loadingCntrl: LoadingController,
@@ -22,9 +23,12 @@ export class OpenTicketsPage {
   ngOnInit(): void {
     this.getAllTickets();
   }
+
   ionViewWillEnter() {
     let id = this.navParams.get('incId');
-    this.removeTicket(id);
+    if(id){
+      this.removeTicket(id);
+    }
   }
 
   getAllTickets() {
@@ -48,6 +52,9 @@ export class OpenTicketsPage {
           a.complete();
         }
         this.items = list;
+        if(!this.items.length){
+          this.conatinerShow=false;
+        }
       }, (error) => {
         if (b === 'get') {
           a.dismiss();

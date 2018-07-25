@@ -12,6 +12,11 @@
 .errorToast .toast-wrapper{
     @include toastMain('danger');
 }
+.toast-md{
+    .toast-wrapper{
+        margin-bottom: 0;
+    }
+}
 .toolbar-background{
     background: color($colors,'primary');
 }

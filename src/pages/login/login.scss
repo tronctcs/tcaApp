@@ -7,11 +7,11 @@ page-login {
     }
     .login__input__list{
         >ion-item{
-        background: transparent;
-        margin-bottom: 10px;
-        border: 1px solid color($colors,'default');
-        border-radius: 50px;
-        color: color($colors,'default');
+            background: transparent;
+            margin-bottom: 10px;
+            border: 1px solid color($colors,'default');
+            border-radius: 50px;
+            color: color($colors,'default');
         }
         .item-inner{
             border-bottom: 0 !important;
@@ -33,5 +33,8 @@ page-login {
     .register__link{
         text-decoration: underline;
         color: color($colors,'default');
+    }
+    .label-md{
+        margin: 0;
     }
 }
