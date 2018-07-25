@@ -47,4 +47,10 @@ page-open-tickets {
         background:  color($colors,'secondary_2');
       }
 
+      .no_tickets__text{
+        padding: 10px 0;
+        margin: 0 !important;
+        color: color($colors,'secondary_2')
+      }
+
 }

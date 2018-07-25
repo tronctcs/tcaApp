@@ -1,6 +1,6 @@
 import { Device } from "@ionic-native/device";
 import { Injectable } from "@angular/core";
-import { Http, RequestOptions, Headers, Response } from "@angular/http";
+import { Http, Headers } from "@angular/http";
 import 'rxjs/Rx';
 import { Storage } from "@ionic/storage";
 

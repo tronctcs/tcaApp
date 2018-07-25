@@ -28,13 +28,13 @@ export class MyApp {
     private menuCntrl: MenuController, private authService: AuthServices,
     public alertCtrl: AlertController, public events: Events, public storage: Storage,
     public keyboard: Keyboard) {
+      
 
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
       this.networkServices.initilizeNetworkEvents();
       this.keyboard.hideKeyboardAccessoryBar(true);
-      this.keyboard.disableScroll(true);
       this.platform.registerBackButtonAction(this.exit);
 
       this.storage.get('tkn').then((val) => {

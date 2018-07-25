@@ -85,4 +85,5 @@
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="cordova-sqlite-storage" spec="^2.3.3" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <plugin name="cordova-plugin-fcm-with-dependecy-updated" spec="^2.2.4" />
 </widget>

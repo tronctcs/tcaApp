@@ -3,9 +3,7 @@ import { IonicPage, NavController, NavParams, LoadingController, AlertController
 import { NgForm } from '@angular/forms';
 import { AuthServices } from '../../services/authServices';
 import { SignUpPage } from '../sign-up/sign-up';
-import { ToastServices } from '../../services/toastServices';
 import { Storage } from '@ionic/storage';
-import { MyApp } from '../../app/app.component';
 
 
 @IonicPage()
