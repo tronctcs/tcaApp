@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.tcs.tca.tcsapp" version="3.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>TCA</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <description>TCS Ticket Claim Application</description>
+    <author email="tronctcs@gmail.com" href="http://www.tcs.com/">TCS</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -86,4 +86,7 @@
     <plugin name="cordova-sqlite-storage" spec="^2.3.3" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-fcm-with-dependecy-updated" spec="^2.2.4" />
+    <plugin name="cordova-plugin-crypt-file" spec="^1.3.3" />
+    <plugin name="cordova-blur-app-privacy-screen" spec="https://github.com/lifeofcoding/cordova-blur-app-privacy-screen.git" />
+    <engine name="browser" spec="5.0.3" />
 </widget>

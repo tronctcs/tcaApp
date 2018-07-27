@@ -12,9 +12,11 @@ import { Storage } from "@ionic/storage";
 })
 export class TicketDetailsPage {
   public tktDetails: Tickets;
+  public tktId:string='';
+  public isNotification:boolean=false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    public menuCntrl: MenuController, public ticketServices: TicketServices,
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    public ticketServices: TicketServices,
     public loadingCntrl: LoadingController, public alertCntrl: AlertController,
     public storage: Storage) {
   }
@@ -22,15 +24,14 @@ export class TicketDetailsPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad TicketDetailsPage');
   }
-  ionViewDidEnter() {
-    this.menuCntrl.enable(false);
-  }
-
-  ionViewWillLeave() {
-    this.menuCntrl.enable(true);
-  }
+  
   ngOnInit(): void {
     this.tktDetails = this.navParams.get('tktDetails');
+    this.tktId=this.navParams.get('tktId');
+    this.isNotification=this.navParams.get('isNotification');
+    if(this.isNotification && this.tktId){
+      this.getTicketDetails(this.tktId);
+    }
   }
 
   claimTicket() {
@@ -78,6 +79,17 @@ export class TicketDetailsPage {
       ]
     });
     alert.present();
+  }
+
+  getTicketDetails(tktId){
+    const loading = this.loadingCntrl.create({
+      content: 'Please wait...'
+    });
+    this.storage.get('tkn').then((val) => {
+    this.tktDetails= this.ticketServices.getTicketDetails(tktId,val);
+    }).then(()=>{
+      loading.dismiss();
+    });
   }
 
 

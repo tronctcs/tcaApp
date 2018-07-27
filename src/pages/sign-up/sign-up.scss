@@ -6,4 +6,8 @@ page-sign-up {
     .signUpBtn{
         margin-top: 10px;
     }
+    .error{
+        color: color($colors,'danger');
+        font-size: 12px;
+    }
 }

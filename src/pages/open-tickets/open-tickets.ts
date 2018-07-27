@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, Events } from 'ionic-angular';
 import { TicketServices } from '../../services/ticketServices';
 import { Storage } from "@ionic/storage";
 import { Tickets } from '../../models/tickets';
@@ -13,11 +13,16 @@ import { TicketDetailsPage } from '../ticket-details/ticket-details';
 export class OpenTicketsPage {
   public items: Tickets[] = [];
   public ticketDetailsPage: any = TicketDetailsPage;
-  public conatinerShow:boolean=true;
+  public conatinerShow: boolean = true;
+  loading: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ticketServices: TicketServices, public loadingCntrl: LoadingController,
-    public storage: Storage, public alertCntrl: AlertController) {
+    public storage: Storage, public alertCntrl: AlertController,
+    public events: Events) {
+    this.loading = this.loadingCntrl.create({
+      content: 'Getting all tickets, please wait...'
+    });
   }
 
   ngOnInit(): void {
@@ -26,17 +31,18 @@ export class OpenTicketsPage {
 
   ionViewWillEnter() {
     let id = this.navParams.get('incId');
-    if(id){
+    if (id) {
       this.removeTicket(id);
     }
   }
 
+  ionViewWillLeave() {
+    this.loading.dismiss();
+  }
+
   getAllTickets() {
-    const loading = this.loadingCntrl.create({
-      content: 'Getting all tickets, please wait...'
-    });
-    loading.present();
-    this.listFun(loading, 'get');
+    this.loading.present();
+    this.listFun(this.loading, 'get');
   }
 
   doRefresh(refresher) {
@@ -52,8 +58,11 @@ export class OpenTicketsPage {
           a.complete();
         }
         this.items = list;
-        if(!this.items.length){
-          this.conatinerShow=false;
+        if (!this.items.length) {
+          this.conatinerShow = false;
+        }
+        if (!this.items[0].IncId) {
+          this.events.publish('user:invalid');
         }
       }, (error) => {
         if (b === 'get') {

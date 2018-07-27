@@ -10,32 +10,65 @@
 <ion-content>
   <ion-row class="signUpFrom">
     <ion-col col-12>
-      <form #f="ngForm" (ngSubmit)="onSignUp(f)">
+      <form novalidate (ngSubmit)="onSubmit()" [formGroup]="user">
         <ion-list class="login__input__list">
           <ion-item>
             <ion-label floating>Name
             </ion-label>
-            <ion-input type="text" name="userid" ngModel required autocomplete="off"></ion-input>
+            <ion-input type="text" formControlName="userName"  value="" autocomplete="off"></ion-input>
+          </ion-item>
+          <ion-item no-lines *ngIf="( user.get('userName').hasError('required') ) && user.get('userName').touched">
+
+            <div class="error" *ngIf="user.get('userName').hasError('required') && user.get('userName').touched">
+              Name is required
+            </div>
+
           </ion-item>
           <ion-item>
             <ion-label floating>
               Email
             </ion-label>
-            <ion-input type="email" name="email" ngModel required autocomplete="off"></ion-input>
+            <ion-input type="email"  clearOnEdit="false"  formControlName="email" value="" autocomplete="off" [pattern]="emailPattern"></ion-input>
+          </ion-item>
+          <ion-item no-lines *ngIf="(user.get('email').hasError('pattern') || user.get('email').hasError('required') ) && user.get('email').touched">
+
+            <div class="error" *ngIf="user.get('email').hasError('required') && user.get('email').touched">
+              Email is required
+            </div>
+            <div class="error" *ngIf="user.get('email').hasError('pattern') && user.get('email').touched">
+              Invalid email id
+            </div>
+
           </ion-item>
           <ion-item>
             <ion-label floating>
               Password
             </ion-label>
-            <ion-input type="password" name="password" ngModel required autocomplete="off"></ion-input>
+            <ion-input type="password"  clearOnEdit="false"  formControlName="password" value="" autocomplete="off" [maxlength]="30" [minlength]='6'></ion-input>
+          </ion-item>
+          <ion-item no-lines *ngIf="( user.get('password').hasError('required') ) && user.get('password').touched">
+
+            <div class="error" *ngIf="user.get('password').hasError('required') && user.get('password').touched">
+              Password is required
+            </div>
+
           </ion-item>
           <ion-item>
             <ion-label floating>
               Confirm Password
             </ion-label>
-            <ion-input type="password" name="password" ngModel required autocomplete="off"></ion-input>
+            <ion-input type="password" formControlName="re_password" value="" autocomplete="off" [maxlength]="30" [minlength]='6'></ion-input>
           </ion-item>
-          <button class="signUpBtn" ion-button block round outline color="secondary" type="submit" [disabled]="!f.valid">Register</button>
+          <ion-item no-lines *ngIf="( user.get('re_password').hasError('equalTo') || user.get('re_password').hasError('required') ) && user.get('re_password').touched">
+
+            <div class="error" *ngIf="user.get('re_password').hasError('required') && user.get('re_password').touched">
+              Confirm password is required
+            </div>
+            <div class="error" *ngIf="user.get('re_password').hasError('equalTo') && user.get('re_password').touched">
+              Password Mismatch
+            </div>
+          </ion-item>
+          <button class="signUpBtn" ion-button block round outline color="secondary" type="submit"  [disabled]="user.invalid">Register</button>
         </ion-list>
       </form>
     </ion-col>

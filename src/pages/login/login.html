@@ -28,7 +28,7 @@
             <ion-label>
               <ion-icon ios="ios-lock" md="md-lock" item-left></ion-icon>
             </ion-label>
-            <ion-input type="password" name="password" ngModel="" required placeholder="Password" autocomplete="off"></ion-input>
+            <ion-input type="password"  clearOnEdit="false"  name="password" ngModel="" required placeholder="Password" autocomplete="off"></ion-input>
           </ion-item>
           <button ion-button block round outline icon-start color="default" type="submit" [disabled]="!f.valid">
             Signin

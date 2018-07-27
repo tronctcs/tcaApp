@@ -9,6 +9,10 @@ import { OpenTicketsPage } from '../pages/open-tickets/open-tickets';
 import { AuthServices } from '../services/authServices';
 import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
+import { User } from '../models/user';
+import { FCM } from '../../node_modules/@ionic-native/fcm';
+import { TicketDetailsPage } from '../pages/ticket-details/ticket-details';
+import { ToastServices } from '../services/toastServices';
 
 
 @Component({
@@ -17,6 +21,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 export class MyApp {
   dashboardPage: any = DashboardPage;
   openTicketsPage: any = OpenTicketsPage;
+  ticketDetailsPage: any = TicketDetailsPage;
   loginPage: any = LoginPage;
   rootPage: any = '';
   isAuthenticated: boolean = false;
@@ -27,12 +32,15 @@ export class MyApp {
     splashScreen: SplashScreen, private networkServices: NetworkServices,
     private menuCntrl: MenuController, private authService: AuthServices,
     public alertCtrl: AlertController, public events: Events, public storage: Storage,
-    public keyboard: Keyboard) {
-      
+    public keyboard: Keyboard, public fcm: FCM, public toastServices: ToastServices) {
+
 
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
+      if (this.platform.is('cordova')) {
+        this.fcmHandler();
+      }
       this.networkServices.initilizeNetworkEvents();
       this.keyboard.hideKeyboardAccessoryBar(true);
       this.platform.registerBackButtonAction(this.exit);
@@ -40,6 +48,7 @@ export class MyApp {
       this.storage.get('tkn').then((val) => {
         if (val !== undefined && val !== "" && val !== null) {
           this.isAuthenticated = true;
+          this.getUserDetails();
         }
       }).then(() => {
         this.changePage();
@@ -51,6 +60,10 @@ export class MyApp {
     events.subscribe('user:login', () => {
       this.isAuthenticated = true;
       this.changePage();
+      this.getUserDetails();
+    });
+    events.subscribe('user:invalid', () => {
+      this.contLogout();
     });
 
   }
@@ -87,9 +100,7 @@ export class MyApp {
         {
           text: 'Yes',
           handler: () => {
-            this.authService.logOut();
-            this.isAuthenticated = false;
-            this.nav.setRoot(this.loginPage);
+            this.contLogout();
           }
         }
       ]
@@ -113,6 +124,37 @@ export class MyApp {
   }
   exitApp() {
     this.platform.exitApp();
+  }
+
+  contLogout() {
+    this.authService.logOut();
+    this.isAuthenticated = false;
+    this.nav.setRoot(this.loginPage);
+  }
+
+  getUserDetails() {
+    this.storage.get('tkn').then((val) => {
+      this.authService.getUserDetails(val).subscribe((data: User) => {
+        this.userName = data.Fname;
+      });
+    });
+  }
+
+  fcmHandler() {
+    this.fcm.getToken().then(token => {
+      this.storage.set('tknId', token);
+    });
+    this.fcm.onNotification().subscribe(data => {
+      if (data.wasTapped) {
+        this.nav.push(this.ticketDetailsPage, {
+          tktId: data.ID,
+          isNotification: true
+        });
+      } else {
+        this.toastServices.presentClosableToast('New incident received.Incident id: ' + data.ID
+          + ' Please refresh the page.', 'bottom');
+      }
+    });
   }
 
 

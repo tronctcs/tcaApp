@@ -33,11 +33,12 @@ export class LoginPage {
     });
     loading.present();
     this.authServices.signIn(f.value.userid, f.value.password)
-      .then(data => {
+      .subscribe(data => {
         loading.dismiss();
         if (data) {
           this.storage.set('tkn', data);
           this.events.publish('user:login');
+          f.resetForm();
         } else {
           const alert = this.alertCntrl.create({
             message: 'Invalid Username or password',
@@ -46,11 +47,10 @@ export class LoginPage {
           });
           alert.present();
         }
-      })
-      .catch(err => {
+      }, (err) => {
         loading.dismiss();
         const alert = this.alertCntrl.create({
-          message: err.message,
+          message: err._body,
           title: 'Signin Falied',
           buttons: ['Ok']
         });

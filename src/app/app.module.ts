@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
+import { FCM } from '@ionic-native/fcm';
 
 import { MyApp } from './app.component';
 import { DashboardPage } from '../pages/dashboard/dashboard';
@@ -20,6 +21,7 @@ import { OpenTicketsPage } from '../pages/open-tickets/open-tickets';
 import { sideMenu } from '../components/menu.component';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { TicketServices } from '../services/ticketServices';
+import { UserRegisterServices } from '../services/userRegister.services';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,9 @@ import { TicketServices } from '../services/ticketServices';
     Device,
     AuthServices,
     Keyboard,
-    TicketServices
+    TicketServices,
+    FCM,
+    UserRegisterServices
   ]
 })
 export class AppModule { }
