@@ -48,10 +48,10 @@ export class MyApp {
       this.storage.get('tkn').then((val) => {
         if (val !== undefined && val !== "" && val !== null) {
           this.isAuthenticated = true;
-          this.getUserDetails();
         }
       }).then(() => {
         this.changePage();
+        this.getUserDetails();
       });
 
 
@@ -109,18 +109,23 @@ export class MyApp {
   }
 
   exit() {
-    let alert = this.alertCtrl.create({
-      title: 'Confirm',
-      message: 'Do you want to exit?',
-      buttons: [{
-        text: "Ok",
-        handler: () => { this.exitApp() }
-      }, {
-        text: "Cancel",
-        role: 'cancel'
-      }]
-    })
-    alert.present();
+    let currInstance = this.nav.getActive().instance;
+    if (currInstance instanceof this.openTicketsPage || currInstance instanceof this.dashboardPage
+      || currInstance instanceof this.loginPage) {
+      let alert = this.alertCtrl.create({
+        title: 'Confirm',
+        message: 'Do you want to exit?',
+        buttons: [{
+          text: "Ok",
+          handler: () => { this.exitApp() }
+        }, {
+          text: "Cancel",
+          role: 'cancel'
+        }]
+      })
+      alert.present();
+    }
+
   }
   exitApp() {
     this.platform.exitApp();
@@ -136,6 +141,8 @@ export class MyApp {
     this.storage.get('tkn').then((val) => {
       this.authService.getUserDetails(val).subscribe((data: User) => {
         this.userName = data.Fname;
+      }, (err) => {
+
       });
     });
   }

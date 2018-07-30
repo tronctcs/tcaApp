@@ -36,8 +36,10 @@ export class LoginPage {
       .subscribe(data => {
         loading.dismiss();
         if (data) {
-          this.storage.set('tkn', data);
-          this.events.publish('user:login');
+          this.storage.set('tkn', data).then(()=>{
+            this.events.publish('user:login');
+          });
+          
           f.resetForm();
         } else {
           const alert = this.alertCntrl.create({
