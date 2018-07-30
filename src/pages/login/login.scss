@@ -37,4 +37,16 @@ page-login {
     .label-md{
         margin: 0;
     }
+    .text-input::-moz-placeholder {
+        color:  color($colors,'default');
+      }
+      
+      .text-input:-ms-input-placeholder {
+        color:  color($colors,'default');
+      }
+      
+      .text-input::-webkit-input-placeholder {
+        text-indent: 0;
+        color:  color($colors,'default');
+      }
 }

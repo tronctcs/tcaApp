@@ -4,6 +4,7 @@ import { TicketServices } from '../../services/ticketServices';
 import { Storage } from "@ionic/storage";
 import { Tickets } from '../../models/tickets';
 import { TicketDetailsPage } from '../ticket-details/ticket-details';
+import { StatusBar } from '../../../node_modules/@ionic-native/status-bar';
 
 @IonicPage()
 @Component({
@@ -19,10 +20,13 @@ export class OpenTicketsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ticketServices: TicketServices, public loadingCntrl: LoadingController,
     public storage: Storage, public alertCntrl: AlertController,
-    public events: Events) {
+    public events: Events, public statusBar:StatusBar) {
+
     this.loading = this.loadingCntrl.create({
       content: 'Getting all tickets, please wait...'
     });
+    
+    this.statusBar.backgroundColorByHexString('#105ee8');
   }
 
   ngOnInit(): void {

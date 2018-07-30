@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormControl, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { UserRegisterServices } from '../../services/userRegister.services';
 import { TicketServices } from '../../services/ticketServices';
+import { StatusBar } from '../../../node_modules/@ionic-native/status-bar';
 
 @IonicPage()
 @Component({
@@ -14,7 +15,9 @@ export class SignUpPage implements OnInit {
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public userRegistration: UserRegisterServices, public ticketServices: TicketServices) {
+    public userRegistration: UserRegisterServices, public ticketServices: TicketServices,
+    public statusBar: StatusBar) {
+    this.statusBar.backgroundColorByHexString('#105ee8');
   }
 
   ngOnInit() {

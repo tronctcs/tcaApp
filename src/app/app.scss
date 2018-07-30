@@ -39,3 +39,6 @@
 [icon-left] ion-icon, [icon-start] ion-icon {
     line-height: 1.1 !important;
 }
+.item-input .label-md, .item-select .label-md, .item-datetime .label-md {
+    color: color($colors,'default') !important;
+}

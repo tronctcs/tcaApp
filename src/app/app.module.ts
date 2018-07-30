@@ -62,7 +62,8 @@ import { UserRegisterServices } from '../services/userRegister.services';
     Keyboard,
     TicketServices,
     FCM,
-    UserRegisterServices
+    UserRegisterServices,
+    StatusBar
   ]
 })
 export class AppModule { }

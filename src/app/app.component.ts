@@ -43,7 +43,7 @@ export class MyApp {
       }
       this.networkServices.initilizeNetworkEvents();
       this.keyboard.hideKeyboardAccessoryBar(true);
-      this.platform.registerBackButtonAction(this.exit);
+      this.platform.registerBackButtonAction(()=>this.exit());
 
       this.storage.get('tkn').then((val) => {
         if (val !== undefined && val !== "" && val !== null) {

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, MenuController, LoadingController,
 import { Tickets } from '../../models/tickets';
 import { TicketServices } from '../../services/ticketServices';
 import { Storage } from "@ionic/storage";
+import { StatusBar } from '../../../node_modules/@ionic-native/status-bar';
 
 
 @IonicPage()
@@ -18,8 +19,10 @@ export class TicketDetailsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public ticketServices: TicketServices,
     public loadingCntrl: LoadingController, public alertCntrl: AlertController,
-    public storage: Storage) {
+    public storage: Storage, public statusBar: StatusBar) {
+      this.statusBar.backgroundColorByHexString('#105ee8');
   }
+  
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TicketDetailsPage');

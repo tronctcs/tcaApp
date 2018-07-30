@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { AuthServices } from '../../services/authServices';
 import { SignUpPage } from '../sign-up/sign-up';
 import { Storage } from '@ionic/storage';
+import { StatusBar } from '../../../node_modules/@ionic-native/status-bar';
 
 
 @IonicPage()
@@ -17,7 +18,8 @@ export class LoginPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public loadingCntrl: LoadingController, public alertCntrl: AlertController,
     private authServices: AuthServices, public menuCntrl: MenuController,
-    public storage: Storage, public events: Events) {
+    public storage: Storage, public events: Events, public statusBar:StatusBar) {
+      this.statusBar.backgroundColorByHexString('#000000');
   }
 
   ionViewDidEnter() {
