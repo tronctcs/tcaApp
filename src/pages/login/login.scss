@@ -49,4 +49,10 @@ page-login {
         text-indent: 0;
         color:  color($colors,'default');
       }
+      .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+        box-shadow: none !important;
+    }
+    .item-input .label-md, .item-select .label-md, .item-datetime .label-md {
+        color: color($colors,'default') !important;
+    }
 }

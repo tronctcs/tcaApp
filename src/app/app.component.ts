@@ -37,13 +37,13 @@ export class MyApp {
 
     platform.ready().then(() => {
       statusBar.styleDefault();
-      splashScreen.hide();
+
       if (this.platform.is('cordova')) {
         this.fcmHandler();
       }
       this.networkServices.initilizeNetworkEvents();
       this.keyboard.hideKeyboardAccessoryBar(true);
-      this.platform.registerBackButtonAction(()=>this.exit());
+      this.platform.registerBackButtonAction(() => this.exit());
 
       this.storage.get('tkn').then((val) => {
         if (val !== undefined && val !== "" && val !== null) {
@@ -52,6 +52,8 @@ export class MyApp {
       }).then(() => {
         this.changePage();
         this.getUserDetails();
+      }).then(() => {
+        splashScreen.hide();
       });
 
 
@@ -115,16 +117,16 @@ export class MyApp {
       let alert = this.alertCtrl.create({
         title: 'Confirm',
         message: 'Do you want to exit?',
-        buttons: [ {
+        buttons: [{
           text: "Cancel",
           role: 'cancel'
-        },{
+        }, {
           text: "Ok",
           handler: () => { this.exitApp() }
         }]
       })
       alert.present();
-    }else{
+    } else {
       this.nav.pop();
     }
 

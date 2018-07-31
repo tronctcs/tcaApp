@@ -33,12 +33,6 @@
     color:  color($colors,'default');
     padding: 10px 5px;
 }
-.item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
-    box-shadow: none !important;
-}
 [icon-left] ion-icon, [icon-start] ion-icon {
     line-height: 1.1 !important;
-}
-.item-input .label-md, .item-select .label-md, .item-datetime .label-md {
-    color: color($colors,'default') !important;
 }
