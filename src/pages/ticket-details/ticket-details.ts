@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { Tickets } from '../../models/tickets';
 import { TicketServices } from '../../services/ticketServices';
 import { Storage } from "@ionic/storage";
@@ -20,12 +20,15 @@ export class TicketDetailsPage {
     public ticketServices: TicketServices,
     public loadingCntrl: LoadingController, public alertCntrl: AlertController,
     public storage: Storage, public statusBar: StatusBar) {
-      this.statusBar.backgroundColorByHexString('#105ee8');
   }
   
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TicketDetailsPage');
+  }
+  ionViewWillEnter(){
+    this.statusBar.backgroundColorByHexString('#105ee8');
+    this.statusBar.styleLightContent();
   }
   
   ngOnInit(): void {

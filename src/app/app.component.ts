@@ -10,7 +10,7 @@ import { AuthServices } from '../services/authServices';
 import { Storage } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
 import { User } from '../models/user';
-import { FCM } from '../../node_modules/@ionic-native/fcm';
+import { FCM } from '@ionic-native/fcm';
 import { TicketDetailsPage } from '../pages/ticket-details/ticket-details';
 import { ToastServices } from '../services/toastServices';
 
@@ -115,15 +115,17 @@ export class MyApp {
       let alert = this.alertCtrl.create({
         title: 'Confirm',
         message: 'Do you want to exit?',
-        buttons: [{
-          text: "Ok",
-          handler: () => { this.exitApp() }
-        }, {
+        buttons: [ {
           text: "Cancel",
           role: 'cancel'
+        },{
+          text: "Ok",
+          handler: () => { this.exitApp() }
         }]
       })
       alert.present();
+    }else{
+      this.nav.pop();
     }
 
   }

@@ -26,7 +26,6 @@ export class OpenTicketsPage {
       content: 'Getting all tickets, please wait...'
     });
     
-    this.statusBar.backgroundColorByHexString('#105ee8');
   }
 
   ngOnInit(): void {
@@ -34,6 +33,8 @@ export class OpenTicketsPage {
   }
 
   ionViewWillEnter() {
+    this.statusBar.backgroundColorByHexString('#105ee8');
+    this.statusBar.styleLightContent();
     let id = this.navParams.get('incId');
     if (id) {
       this.removeTicket(id);

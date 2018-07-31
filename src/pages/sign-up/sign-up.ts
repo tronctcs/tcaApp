@@ -17,7 +17,6 @@ export class SignUpPage implements OnInit {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public userRegistration: UserRegisterServices, public ticketServices: TicketServices,
     public statusBar: StatusBar) {
-    this.statusBar.backgroundColorByHexString('#105ee8');
   }
 
   ngOnInit() {
@@ -31,6 +30,10 @@ export class SignUpPage implements OnInit {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignUpPage');
+  }
+  ionViewWillEnter(){
+    this.statusBar.backgroundColorByHexString('#105ee8');
+    this.statusBar.styleLightContent();
   }
 
   equalto(field_name): ValidatorFn {

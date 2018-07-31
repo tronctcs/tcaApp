@@ -17,11 +17,14 @@ import { StatusBar } from '../../../node_modules/@ionic-native/status-bar';
 export class DashboardPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public statusBar:StatusBar) {
-    this.statusBar.backgroundColorByHexString('#105ee8');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');
+  }
+  ionViewWillEnter(){
+    this.statusBar.backgroundColorByHexString('#105ee8');
+    this.statusBar.styleLightContent();
   }
 
 }

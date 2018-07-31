@@ -6,13 +6,15 @@ import { Storage } from "@ionic/storage";
 
 import * as Constants from '../constants/app.constants';
 import { User } from "../models/user";
+import { ToastServices } from "./toastServices";
 
 @Injectable()
 export class AuthServices {
     private deviceId: string = '';
-    public user:User;
+    public user: User;
 
-    constructor(public device: Device, private http: Http, public storage: Storage) {
+    constructor(public device: Device, private http: Http, public storage: Storage,
+        public toastService: ToastServices) {
         this.deviceId = this.device.uuid;
         if (!this.deviceId) {
             this.deviceId = '0000';
@@ -20,11 +22,12 @@ export class AuthServices {
     }
 
 
-    signIn(userid: string, password: string) {
+    signIn(userid: string, password: string, val) {
+        let nVal = val !== null ? val : '0000';
         var headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-        let body = "userid=" + userid.toLowerCase() + "&password=" + btoa(password) + "&deviceid=" + this.deviceId;
+        let body = "userid=" + userid.toLowerCase() + "&password=" + btoa(password) + "&deviceid=" + nVal;
 
         return this.http.post(Constants.baseURL + "/IsLogin", body, { headers: headers })
             .map((response: Response) => {
@@ -45,13 +48,13 @@ export class AuthServices {
         });
 
     }
-    
-    getUserDetails(val){
-        return this.http.get(Constants.baseURL+'/Details?token=' + val)
+
+    getUserDetails(val) {
+        return this.http.get(Constants.baseURL + '/Details?token=' + val)
             .map((response: Response) => {
                 return response.json();
             }).do((data) => {
-                this.user=data;
+                this.user = data;
             });
     }
 }

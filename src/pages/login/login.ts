@@ -18,12 +18,15 @@ export class LoginPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public loadingCntrl: LoadingController, public alertCntrl: AlertController,
     private authServices: AuthServices, public menuCntrl: MenuController,
-    public storage: Storage, public events: Events, public statusBar:StatusBar) {
-      this.statusBar.backgroundColorByHexString('#000000');
+    public storage: Storage, public events: Events, public statusBar: StatusBar) {
   }
 
   ionViewDidEnter() {
     this.menuCntrl.enable(false);
+  }
+  ionViewWillEnter() {
+    this.statusBar.backgroundColorByHexString('#000000');
+    this.statusBar.styleLightContent();
   }
 
   ionViewWillLeave() {
@@ -34,32 +37,35 @@ export class LoginPage {
       content: 'Signing you in...'
     });
     loading.present();
-    this.authServices.signIn(f.value.userid, f.value.password)
-      .subscribe(data => {
-        loading.dismiss();
-        if (data) {
-          this.storage.set('tkn', data).then(()=>{
-            this.events.publish('user:login');
-          });
-          
-          f.resetForm();
-        } else {
+    this.storage.get('tknId').then((val) => {
+      this.authServices.signIn(f.value.userid, f.value.password,val)
+        .subscribe(data => {
+          loading.dismiss();
+          if (data) {
+            this.storage.set('tkn', data).then(() => {
+              this.events.publish('user:login');
+            });
+
+            f.resetForm();
+          } else {
+            const alert = this.alertCntrl.create({
+              message: 'Invalid Username or password',
+              title: 'Signin Falied',
+              buttons: ['Ok']
+            });
+            alert.present();
+          }
+        }, (err) => {
+          loading.dismiss();
           const alert = this.alertCntrl.create({
-            message: 'Invalid Username or password',
+            message: err._body,
             title: 'Signin Falied',
             buttons: ['Ok']
           });
           alert.present();
-        }
-      }, (err) => {
-        loading.dismiss();
-        const alert = this.alertCntrl.create({
-          message: err._body,
-          title: 'Signin Falied',
-          buttons: ['Ok']
         });
-        alert.present();
-      });
+    });
+
   }
 
   signUp() {
