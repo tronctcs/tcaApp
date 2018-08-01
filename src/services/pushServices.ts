@@ -21,7 +21,7 @@ export class PushServices {
             android: {
                 sound: true,
                 vibrate: true,
-                icon: 'ic_drawable_xxxhdpi_icon',
+                icon: 'fcm_push_icon',
                 iconColor: '#343434',
             },
             ios: {
@@ -30,7 +30,6 @@ export class PushServices {
                 sound: 'true'
             }
         };
-
-        const pushObject: PushObject = this.push.init(options);
+        this.push.init(options);
     }
 }

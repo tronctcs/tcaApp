@@ -125,7 +125,8 @@ export class MyApp {
           text: "Ok",
           handler: () => { this.exitApp() }
         }]
-      })
+      });
+      alert.dismiss();
       alert.present();
     } else {
       this.nav.pop();
