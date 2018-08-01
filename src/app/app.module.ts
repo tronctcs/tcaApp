@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 import { Keyboard } from '@ionic-native/keyboard';
 import { FCM } from '@ionic-native/fcm';
+import { Push } from '@ionic-native/push';
 
 import { MyApp } from './app.component';
 import { DashboardPage } from '../pages/dashboard/dashboard';
@@ -22,6 +23,7 @@ import { sideMenu } from '../components/menu.component';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { TicketServices } from '../services/ticketServices';
 import { UserRegisterServices } from '../services/userRegister.services';
+import { PushServices } from '../services/pushServices';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import { UserRegisterServices } from '../services/userRegister.services';
     TicketServices,
     FCM,
     UserRegisterServices,
-    StatusBar
+    StatusBar,
+    Push,
+    PushServices
   ]
 })
 export class AppModule { }

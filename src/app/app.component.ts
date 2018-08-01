@@ -13,6 +13,7 @@ import { User } from '../models/user';
 import { FCM } from '@ionic-native/fcm';
 import { TicketDetailsPage } from '../pages/ticket-details/ticket-details';
 import { ToastServices } from '../services/toastServices';
+import { PushServices } from '../services/pushServices';
 
 
 @Component({
@@ -32,13 +33,15 @@ export class MyApp {
     splashScreen: SplashScreen, private networkServices: NetworkServices,
     private menuCntrl: MenuController, private authService: AuthServices,
     public alertCtrl: AlertController, public events: Events, public storage: Storage,
-    public keyboard: Keyboard, public fcm: FCM, public toastServices: ToastServices) {
+    public keyboard: Keyboard, public fcm: FCM, public toastServices: ToastServices,
+    public pushServices: PushServices) {
 
 
     platform.ready().then(() => {
       statusBar.styleDefault();
 
       if (this.platform.is('cordova')) {
+        this.pushServices.initializePush();
         this.fcmHandler();
       }
       this.networkServices.initilizeNetworkEvents();
@@ -66,8 +69,7 @@ export class MyApp {
     });
     events.subscribe('user:invalid', () => {
       this.contLogout();
-    });
-
+    }); 
   }
 
   changePage() {
@@ -76,7 +78,6 @@ export class MyApp {
     } else {
       this.nav.setRoot(this.loginPage);
     }
-
   }
   onLoad(page: any) {
     this.nav.setRoot(page);
@@ -166,6 +167,7 @@ export class MyApp {
           + ' Please refresh the page.', 'bottom');
       }
     });
+
   }
 
 
