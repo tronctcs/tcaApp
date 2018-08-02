@@ -22,7 +22,7 @@ export class PushServices {
                 sound: true,
                 vibrate: true,
                 icon: 'fcm_push_icon',
-                iconColor: '#343434',
+                iconColor: '#59bcf7',
             },
             ios: {
                 alert: 'true',

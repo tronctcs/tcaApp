@@ -96,9 +96,7 @@ export class MyApp {
         {
           text: 'Cancel',
           role: 'cancel',
-          handler: () => {
-
-          }
+          handler: () => {}
         },
         {
           text: 'Yes',
