@@ -69,7 +69,7 @@ export class MyApp {
     });
     events.subscribe('user:invalid', () => {
       this.contLogout();
-    }); 
+    });
   }
 
   changePage() {
@@ -96,7 +96,7 @@ export class MyApp {
         {
           text: 'Cancel',
           role: 'cancel',
-          handler: () => {}
+          handler: () => { }
         },
         {
           text: 'Yes',
@@ -157,10 +157,7 @@ export class MyApp {
     });
     this.fcm.onNotification().subscribe(data => {
       if (data.wasTapped) {
-        this.nav.push(this.ticketDetailsPage, {
-          tktId: data.ID,
-          isNotification: true
-        });
+        this.events.publish('isNotification', data);
       } else {
         this.toastServices.presentClosableToast('New incident received.Incident id: ' + data.ID
           + ' Please refresh the page.', 'bottom');

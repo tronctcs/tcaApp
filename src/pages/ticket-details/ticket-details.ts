@@ -14,7 +14,7 @@ import { StatusBar } from '../../../node_modules/@ionic-native/status-bar';
 export class TicketDetailsPage {
   public tktDetails: Tickets;
   public tktId:string='';
-  public isNotification:boolean=false;
+  public fromNotification:boolean=false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public ticketServices: TicketServices,
@@ -34,8 +34,8 @@ export class TicketDetailsPage {
   ngOnInit(): void {
     this.tktDetails = this.navParams.get('tktDetails');
     this.tktId=this.navParams.get('tktId');
-    this.isNotification=this.navParams.get('isNotification');
-    if(this.isNotification && this.tktId){
+    this.fromNotification=this.navParams.get('fromNotification');
+    if(this.fromNotification && this.tktId){
       this.getTicketDetails(this.tktId);
     }
   }

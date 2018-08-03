@@ -25,6 +25,8 @@ export class OpenTicketsPage {
     this.loading = this.loadingCntrl.create({
       content: 'Getting all tickets, please wait...'
     });
+
+    this.handleNotification();
     
   }
 
@@ -136,6 +138,12 @@ export class OpenTicketsPage {
       return el.IncId !== IncId;
     });
     this.items = nArr;
+  }
+
+  handleNotification(){
+    this.events.subscribe('isNotification',(data)=>{
+      this.navCtrl.push(this.ticketDetailsPage,{tktId:data.ID,fromNotification:true})
+    });
   }
 
 }
