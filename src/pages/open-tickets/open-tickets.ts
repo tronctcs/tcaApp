@@ -26,12 +26,15 @@ export class OpenTicketsPage {
       content: 'Getting all tickets, please wait...'
     });
 
-    this.handleNotification();
+    
     
   }
 
   ngOnInit(): void {
     this.getAllTickets();
+  }
+  ionViewDidLoad(){
+    this.handleNotification();
   }
 
   ionViewWillEnter() {
@@ -142,7 +145,7 @@ export class OpenTicketsPage {
 
   handleNotification(){
     this.events.subscribe('isNotification',(data)=>{
-      this.navCtrl.push(this.ticketDetailsPage,{tktId:data.ID,fromNotification:true})
+      this.navCtrl.setRoot(this.ticketDetailsPage,{tktId:data.ID,fromNotification:true})
     });
   }
 

@@ -159,7 +159,7 @@ export class MyApp {
       if (data.wasTapped) {
         this.events.publish('isNotification', data);
       } else {
-        this.toastServices.presentClosableToast('New incident received.Incident id: ' + data.ID
+        this.toastServices.presentClosableToast('New incident received. Incident id: ' + data.IncId
           + ' Please refresh the page.', 'bottom');
       }
     });
