@@ -61,5 +61,6 @@ export class TicketServices {
             buttons: ['Ok']
         });
         alert.present();
+        return alert;
     }
 }

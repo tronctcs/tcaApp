@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, Events } from 'ionic-angular';
 import { Tickets } from '../../models/tickets';
 import { TicketServices } from '../../services/ticketServices';
 import { Storage } from "@ionic/storage";
 import { StatusBar } from '../../../node_modules/@ionic-native/status-bar';
+import { OpenTicketsPage } from '../open-tickets/open-tickets';
 
 
 @IonicPage()
@@ -13,31 +14,28 @@ import { StatusBar } from '../../../node_modules/@ionic-native/status-bar';
 })
 export class TicketDetailsPage {
   public tktDetails: Tickets;
-  public tktId:string='';
-  public fromNotification:boolean=false;
+  public tktId: string = '0000';
+  public fromNotification: boolean = false;
+  public openTicketsPage: OpenTicketsPage;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
+  constructor(public navCtrl: NavController, public navParams: NavParams,
     public ticketServices: TicketServices,
     public loadingCntrl: LoadingController, public alertCntrl: AlertController,
-    public storage: Storage, public statusBar: StatusBar) {
+    public storage: Storage, public statusBar: StatusBar, public events: Events) {
+
   }
-  
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TicketDetailsPage');
   }
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.statusBar.backgroundColorByHexString('#105ee8');
     this.statusBar.styleLightContent();
   }
-  
+
   ngOnInit(): void {
     this.tktDetails = this.navParams.get('tktDetails');
-    this.tktId=this.navParams.get('tktId');
-    this.fromNotification=this.navParams.get('fromNotification');
-    if(this.fromNotification && this.tktId){
-      this.getTicketDetails(this.tktId);
-    }
+    this.fromNotification = this.navParams.get('fromNotification');
   }
 
   claimTicket() {
@@ -63,18 +61,28 @@ export class TicketDetailsPage {
               loading.present();
               this.ticketServices.claimTicket(this.tktDetails.IncId, val).subscribe((data) => {
                 loading.dismiss();
+                let alertModal;
 
                 if (data === 1) {
-                  this.ticketServices.handleAlert('Ticket claimed successfully. Please check cloud plus', 's');
+                  alertModal = this.ticketServices.handleAlert('Ticket claimed successfully. Please check cloud plus', 's');
                 } else if (data === 2) {
-                  this.ticketServices.handleAlert('Sorry, you are not authorized to claim the incident', 'e');
+                  alertModal = this.ticketServices.handleAlert('Sorry, you are not authorized to claim the incident', 'e');
                 } else if (data === 3) {
-                  this.ticketServices.handleAlert('Some error occoured', 'e');
+                  alertModal = this.ticketServices.handleAlert('Some error occoured', 'e');
                 } else {
-                  this.ticketServices.handleAlert('Ticket already claimed by someone else.  Please check cloud plus', 's');
+                  alertModal = this.ticketServices.handleAlert('Ticket already claimed by someone else.  Please check cloud plus', 's');
                 }
-                this.navCtrl.getPrevious().data.incId=this.tktDetails.IncId;
-                this.navCtrl.pop();
+
+                if (this.fromNotification) {
+                  setTimeout(() => {
+                    alertModal.dismiss();
+                    this.changeRoot()
+                  }, 2000);
+                } else {
+                  this.navCtrl.getPrevious().data.incId = this.tktDetails.IncId;
+                  this.navCtrl.pop();
+                }
+
               }, (err) => {
                 loading.dismiss();
                 this.ticketServices.handleAlert(err, 'E');
@@ -87,15 +95,19 @@ export class TicketDetailsPage {
     alert.present();
   }
 
-  getTicketDetails(tktId){
+  getTicketDetails(tktId) {
     const loading = this.loadingCntrl.create({
       content: 'Please wait...'
     });
     this.storage.get('tkn').then((val) => {
-    this.tktDetails= this.ticketServices.getTicketDetails(tktId,val);
-    }).then(()=>{
+      this.tktDetails = this.ticketServices.getTicketDetails(tktId, val);
+    }).then(() => {
       loading.dismiss();
     });
+  }
+
+  changeRoot() {
+    this.events.publish('user:setRoot');
   }
 
 

@@ -14,6 +14,7 @@ import { FCM } from '@ionic-native/fcm';
 import { TicketDetailsPage } from '../pages/ticket-details/ticket-details';
 import { ToastServices } from '../services/toastServices';
 import { PushServices } from '../services/pushServices';
+import { Tickets } from '../models/tickets';
 
 
 @Component({
@@ -69,6 +70,9 @@ export class MyApp {
     });
     events.subscribe('user:invalid', () => {
       this.contLogout();
+    });
+    events.subscribe('user:setRoot', () => {
+      this.nav.setRoot(this.openTicketsPage);
     });
   }
 
@@ -157,7 +161,10 @@ export class MyApp {
     });
     this.fcm.onNotification().subscribe(data => {
       if (data.wasTapped) {
-        this.events.publish('isNotification', data);
+        let tktDetails = new Tickets(data.ID, data.AssignedGroup, data.CreatedOn,
+          data.CreateUpdatesBy, data.Decs, data.Remarks, data.IncId, data.IsClaimed,
+          data.Priority, data.PriorityDisplay, data.Source, data.Status, data.Title, data.Urgency);
+          this.nav.setRoot(this.ticketDetailsPage, { tktDetails: tktDetails, fromNotification: true });
       } else {
         this.toastServices.presentClosableToast('New incident received. Incident id: ' + data.IncId
           + ' Please refresh the page.', 'bottom');

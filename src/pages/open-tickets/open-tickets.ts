@@ -33,9 +33,6 @@ export class OpenTicketsPage {
   ngOnInit(): void {
     this.getAllTickets();
   }
-  ionViewDidLoad(){
-    this.handleNotification();
-  }
 
   ionViewWillEnter() {
     this.statusBar.backgroundColorByHexString('#105ee8');
@@ -143,10 +140,12 @@ export class OpenTicketsPage {
     this.items = nArr;
   }
 
-  handleNotification(){
-    this.events.subscribe('isNotification',(data)=>{
-      this.navCtrl.setRoot(this.ticketDetailsPage,{tktId:data.ID,fromNotification:true})
+  refreshPage(){
+    this.loading = this.loadingCntrl.create({
+      content: 'Refreshing, please wait...'
     });
+    this.loading.present();
+    this.listFun(this.loading, 'get');
   }
 
 }

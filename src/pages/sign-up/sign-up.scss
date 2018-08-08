@@ -1,4 +1,10 @@
 page-sign-up {
+    ion-content{
+        background: #e6f7ff !important;
+    }
+    ion-item{
+        background: transparent !important;
+    }
     .list-ios > .item-block:first-child{
         border-top: 0;
     }

@@ -13,14 +13,28 @@
       <form novalidate (ngSubmit)="onSubmit()" [formGroup]="user">
         <ion-list class="login__input__list">
           <ion-item>
-            <ion-label floating>Name
+            <ion-label floating>First Name
             </ion-label>
-            <ion-input type="text" formControlName="userName"  value="" autocomplete="off"></ion-input>
+            <ion-input type="text" formControlName="firstName"  value="" autocomplete="off"></ion-input>
           </ion-item>
-          <ion-item no-lines *ngIf="( user.get('userName').hasError('required') ) && user.get('userName').touched">
+          <ion-item no-lines *ngIf="( user.get('firstName').hasError('required') || !user.get('firstName').hasError('pattern')) && user.get('firstName').touched">
 
-            <div class="error" *ngIf="user.get('userName').hasError('required') && user.get('userName').touched">
-              Name is required
+            <div class="error" *ngIf="user.get('firstName').hasError('required') && user.get('firstName').touched">
+              First name is required
+            </div>
+            <div class="error" *ngIf="!user.get('firstName').hasError('pattern') && user.get('firstName').touched">
+              Invalid first name.
+            </div>
+
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Last Name
+            </ion-label>
+            <ion-input type="text" formControlName="lastName"  value="" autocomplete="off"></ion-input>
+          </ion-item>
+          <ion-item no-lines *ngIf="!user.get('lastName').hasError('pattern') && user.get('lastName').touched  && user.get('lastName').length!==0">
+            <div class="error" *ngIf="!user.get('lastName').hasError('pattern') && user.get('lastName').touched">
+              Invalid last name.
             </div>
 
           </ion-item>
@@ -68,7 +82,7 @@
               Password Mismatch
             </div>
           </ion-item>
-          <button class="signUpBtn" ion-button block round outline color="secondary" type="submit"  [disabled]="user.invalid">Register</button>
+          <button class="signUpBtn" ion-button block round color="secondary" type="submit"  [disabled]="user.invalid">Register</button>
         </ion-list>
       </form>
     </ion-col>
