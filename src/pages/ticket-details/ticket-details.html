@@ -2,7 +2,7 @@
 
   <ion-navbar>
     <ion-title>{{tktDetails.IncId}}</ion-title>
-    <ion-buttons start *ngIf="fromNotification">
+    <ion-buttons left *ngIf="fromNotification">
       <button ion-button icon-only (click)="changeRoot()">
         <ion-icon name="arrow-back"></ion-icon>
       </button>

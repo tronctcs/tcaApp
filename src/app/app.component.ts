@@ -29,6 +29,7 @@ export class MyApp {
   isAuthenticated: boolean = false;
   @ViewChild('nav') nav: NavController;
   userName: string = "User"
+  public isNotification:boolean=false;
 
   constructor(public platform: Platform, statusBar: StatusBar,
     splashScreen: SplashScreen, private networkServices: NetworkServices,
@@ -77,11 +78,14 @@ export class MyApp {
   }
 
   changePage() {
-    if (this.isAuthenticated) {
-      this.nav.setRoot(this.openTicketsPage);
-    } else {
-      this.nav.setRoot(this.loginPage);
+    if(!this.isNotification){
+      if (this.isAuthenticated) {
+        this.nav.setRoot(this.openTicketsPage);
+      } else {
+        this.nav.setRoot(this.loginPage);
+      }
     }
+    
   }
   onLoad(page: any) {
     this.nav.setRoot(page);
@@ -161,8 +165,9 @@ export class MyApp {
     });
     this.fcm.onNotification().subscribe(data => {
       if (data.wasTapped) {
+        this.isNotification=true;
         let tktDetails = new Tickets(data.ID, data.AssignedGroup, data.CreatedOn,
-          data.CreateUpdatesBy, data.Decs, data.Remarks, data.IncId, data.IsClaimed,
+          data.CreatedBy, data.Decs, data.Remarks, data.IncId, data.IsClaimed,
           data.Priority, data.PriorityDisplay, data.Source, data.Status, data.Title, data.Urgency);
           this.nav.setRoot(this.ticketDetailsPage, { tktDetails: tktDetails, fromNotification: true });
       } else {
