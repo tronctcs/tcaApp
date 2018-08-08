@@ -17,13 +17,13 @@
             </ion-label>
             <ion-input type="text" formControlName="firstName"  value="" autocomplete="off"></ion-input>
           </ion-item>
-          <ion-item no-lines *ngIf="( user.get('firstName').hasError('required') || !user.get('firstName').hasError('pattern')) && user.get('firstName').touched">
+          <ion-item no-lines *ngIf="( user.get('firstName').hasError('required') || user.get('firstName').hasError('pattern')) && user.get('firstName').touched">
 
             <div class="error" *ngIf="user.get('firstName').hasError('required') && user.get('firstName').touched">
               First name is required
             </div>
-            <div class="error" *ngIf="!user.get('firstName').hasError('pattern') && user.get('firstName').touched">
-              Invalid first name.
+            <div class="error" *ngIf="user.get('firstName').hasError('pattern') && user.get('firstName').touched && user.value.firstName.length">
+              Invalid first name
             </div>
 
           </ion-item>
@@ -32,9 +32,9 @@
             </ion-label>
             <ion-input type="text" formControlName="lastName"  value="" autocomplete="off"></ion-input>
           </ion-item>
-          <ion-item no-lines *ngIf="!user.get('lastName').hasError('pattern') && user.get('lastName').touched  && user.get('lastName').length!==0">
-            <div class="error" *ngIf="!user.get('lastName').hasError('pattern') && user.get('lastName').touched">
-              Invalid last name.
+          <ion-item no-lines *ngIf="user.get('lastName').hasError('pattern') && user.get('lastName').touched  && user.value.lastName.length">
+            <div class="error" *ngIf="user.get('lastName').hasError('pattern') && user.get('lastName').touched">
+              Invalid last name
             </div>
 
           </ion-item>

@@ -13,7 +13,7 @@ import { StatusBar } from '../../../node_modules/@ionic-native/status-bar';
 export class SignUpPage implements OnInit {
   user: FormGroup;
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
-  specialChars= /\`|\~|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\+|\=|\[|\{|\]|\}|\||\\|\'|\<|\,|\.|\>|\?|\/|\;|\:|\s/g
+  specialChars= /^[a-z]+$/i;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public userRegistration: UserRegisterServices, public ticketServices: TicketServices,
