@@ -58,7 +58,7 @@ export class LoginPage {
         }, (err) => {
           loading.dismiss();
           const alert = this.alertCntrl.create({
-            message: err._body,
+            message: err._body.replace(/['"]+/g, ''),
             title: 'Signin Falied',
             buttons: ['Ok']
           });
