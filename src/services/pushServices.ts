@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Push, PushObject, PushOptions } from '@ionic-native/push';
+import { Push, PushOptions } from '@ionic-native/push';
 
 @Injectable()
 export class PushServices {
