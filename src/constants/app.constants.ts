@@ -1,1 +1,1 @@
-export const baseURL='https://stagetca.tronc.com/api/tca';
+export const baseURL='https://tca.tronc.com/api/tca';
