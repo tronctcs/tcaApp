@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "86467201781",
-    "firebase_url": "https://newtcaapp.firebaseio.com",
-    "project_id": "newtcaapp",
-    "storage_bucket": "newtcaapp.appspot.com"
+    "project_number": "244543424395",
+    "firebase_url": "https://tcaappv2.firebaseio.com",
+    "project_id": "tcaappv2",
+    "storage_bucket": "tcaappv2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:86467201781:android:bd57307675a4a32b",
+        "mobilesdk_app_id": "1:244543424395:android:129e515dfb8c1aa1",
         "android_client_info": {
-          "package_name": "com.tcs.tca.tcsapp"
+          "package_name": "com.tcs.tca.tcsappv2"
         }
       },
       "oauth_client": [
         {
-          "client_id": "86467201781-si6bqfroe0mo3q4b4klqh9sgs6uij928.apps.googleusercontent.com",
+          "client_id": "244543424395-smbj94c2vqqe60gp206vgft0simmiofk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyABAbxl2LSTz1vA1HriEvCDz-BBty5eIJc"
+          "current_key": "AIzaSyBFyTmF_9mi9w75PrSQu6zyIoWB7xESFdE"
         }
       ],
       "services": {
